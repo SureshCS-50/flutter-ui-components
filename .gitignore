@@ -9,6 +9,11 @@
 .history
 .svn/
 
+# eclipse related
+**/.project
+**/.settings
+**/.classpath
+
 # IntelliJ related
 *.iml
 *.ipr
