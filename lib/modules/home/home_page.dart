@@ -18,16 +18,16 @@ class _MyHomePageState extends State<MyHomePage> {
       icon: Icon(Icons.library_books),
       title: Text('Basics'),
     ),
-    // BottomNavigationBarItem(
-    //   backgroundColor: Colors.blueAccent,
-    //   icon: Icon(Icons.insert_chart),
-    //   title: Text('Advanced'),
-    // ),
-   BottomNavigationBarItem(
-     backgroundColor: Colors.indigo,
-     icon: Icon(Icons.people),
-     title: Text('About'),
-   ),
+    BottomNavigationBarItem(
+      backgroundColor: Colors.blueAccent,
+      icon: Icon(Icons.insert_chart),
+      title: Text('Advanced'),
+    ),
+    BottomNavigationBarItem(
+      backgroundColor: Colors.indigo,
+      icon: Icon(Icons.people),
+      title: Text('About'),
+    ),
   ];
 
   int _currentTabIndex = 0;
@@ -38,10 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
       for (final UIRouteGroup group in appRoutesBasic)
         _uiRouteGroupToExpansionTile(group),
     ];
-//    final advancedDemos = <Widget>[
-//      for (final UIRouteGroup group in kMyAppRoutesAdvanced)
-//        _uiRouteGroupToExpansionTile(group),
-//    ];
+    final advancedDemos = <Widget>[
+      for (final UIRouteGroup group in appRoutesAdvanced)
+        _uiRouteGroupToExpansionTile(group),
+    ];
     final bookmarkAndAboutDemos = <Widget>[
       for (final UIRoute route
           in Provider.of<MyAppSettings>(context).starredRoutes)
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: IndexedStack(
         children: <Widget>[
           ListView(children: basicDemos),
-//          ListView(children: advancedDemos),
+         ListView(children: advancedDemos),
           ListView(children: bookmarkAndAboutDemos),
         ],
         index: _currentTabIndex,

@@ -4,23 +4,14 @@ import 'package:flutter_ui_components/constants.dart';
 import 'package:flutter_ui_components/modules/about/about.dart';
 import 'package:flutter_ui_components/modules/app/app_settings.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:widget_with_codeview/widget_with_codeview.dart';
 
 class UIRoute extends StatelessWidget {
-  // Path of source file (relative to project root). The file's content will be
-  // shown in the "Code" tab.
   final String sourceFilePath;
-  // Actual content of the example.
   final Widget child;
-  // Title shown in the route's appbar. By default just returns routeName.
   final String _title;
-  // A short description of the route. If not null, will be shown as subtitle in
-  // the home page list tile.
   final String description;
-  // Reference Links.
   final Map<String, String> links;
-  // Route name of a page.
   final String _routeName;
 
   const UIRoute({
@@ -61,7 +52,7 @@ class UIRoute extends StatelessWidget {
                 : WidgetWithCodeView(
                     child: this.child,
                     sourceFilePath: this.sourceFilePath,
-                    codeLinkPrefix: '$GITHUB_URL/blob/master',
+                    codeLinkPrefix: '$GITHUB_URL/blob/master/',
                   ),
       ),
       frontLayerBorderRadius: BorderRadius.only(),
@@ -77,26 +68,7 @@ class UIRoute extends StatelessWidget {
     final settings = Provider.of<MyAppSettings>(context);
     return <Widget>[
       if (this.routeName != Navigator.defaultRouteName)
-        settings.starStatusOfRoute(this.routeName),
-      if (this.links?.isNotEmpty ?? false)
-        PopupMenuButton(
-          itemBuilder: (context) {
-            return <PopupMenuItem>[
-              for (MapEntry<String, String> titleAndLink in this.links.entries)
-                PopupMenuItem(
-                  child: ListTile(
-                    title: Text(titleAndLink.key),
-                    trailing: IconButton(
-                      icon: Icon(Icons.open_in_new),
-                      tooltip: '${titleAndLink.value}',
-                      onPressed: () => url_launcher.launch(titleAndLink.value),
-                    ),
-                    onTap: () => url_launcher.launch(titleAndLink.value),
-                  ),
-                )
-            ];
-          },
-        ),
+        settings.starStatusOfRoute(this.routeName)
     ];
   }
 
